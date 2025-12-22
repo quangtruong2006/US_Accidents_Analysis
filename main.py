@@ -1,19 +1,25 @@
 import os
+import pandas as pd
 from Modules.data_loader import load_data
-
-#Định nghĩa đường dẫn đến file dữ liệu đã lọc
+from Modules.cleaner import clean_data
+from Modules.analysis import analyze_accidents
+from Modules.visualizer import plot_charts
+from Modules.map_visualizer import plot_heatmap 
 
 data_path = 'Data/processed/US_Accidents_Top20_Cities.csv'
 
 def main():
-    print("🚀 CHƯƠNG TRÌNH PHÂN TÍCH TAI NẠN GIAO THÔNG MỸ - NHÓM 2 ")
+    print("🚀 CHƯƠNG TRÌNH PHÂN TÍCH TAI NẠN GIAO THÔNG MỸ - NHÓM 2")
     print("-" * 50)
-
-    # 2. Gọi hàm đọc dữ liệu từ module data_loader
     df = load_data(data_path)
-
     if df is not None:
-        print(f"\n🎉 Chạy thử thành công! Dữ liệu đã sẵn sàng để phân tích.")
+        print(f"✅ Đã đọc xong! Tổng số dòng: {len(df)}")
+        df_clean = clean_data(df)
+        stats = analyze_accidents(df_clean)
+        plot_charts(stats)
+        plot_heatmap(df_clean)
+        print("-" * 50)
+        print(f"🎉 Quy trình chạy thử hoàn tất! Dữ liệu đã sẵn sàng.")
     else:
         print("\n⚠️ Có lỗi xảy ra, vui lòng kiểm tra lại file data.")
 
