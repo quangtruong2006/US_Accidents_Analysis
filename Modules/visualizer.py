@@ -2,107 +2,50 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# =========================
-# 0) ĐỌC DỮ LIỆU
-# =========================
-# Đọc file CSV dữ liệu tai nạn (dữ liệu thật)
-# 👉 SỬA ĐƯỜNG DẪN CHO ĐÚNG MÁY BẠN
-df = pd.read_csv("US_Accidents_Top20_Cities.csv")
+def draw_static_charts(csv_path, out_dir="Outputs", top_n=5):
+    # Load data
+    df = pd.read_csv(csv_path)
 
-# Chuyển Start_Time sang datetime để lấy Năm
-df["Start_Time"] = pd.to_datetime(df["Start_Time"], errors="coerce")
+    # Check cột cần thiết
+    for c in ["City", "State", "Start_Time"]:
+        if c not in df.columns:
+            raise ValueError(f"Thiếu cột {c}. Cột hiện có: {list(df.columns)}")
 
-# Loại bỏ dòng thiếu thời gian
-df = df.dropna(subset=["Start_Time"])
+    # Xử lý thời gian + tạo mốc năm
+    df["Start_Time"] = pd.to_datetime(df["Start_Time"], errors="coerce")
+    df = df.dropna(subset=["Start_Time", "City", "State"])
+    df["Year"] = df["Start_Time"].dt.year
 
-# Tạo cột Năm
-df["Year"] = df["Start_Time"].dt.year
+    # Tạo cột địa điểm "City, State" và lấy Top N địa điểm
+    df["CityState"] = df["City"].astype(str).str.strip() + ", " + df["State"].astype(str).str.strip()
+    top_locs = df["CityState"].value_counts().head(top_n).index
+    df_top = df[df["CityState"].isin(top_locs)]
 
+    # (1) Bar: chênh lệch tai nạn theo Năm & Địa điểm
+    year_loc = df_top.groupby(["Year", "CityState"]).size().reset_index(name="Accidents")
+    plt.figure(figsize=(10, 5))
+    sns.barplot(data=year_loc, x="Year", y="Accidents", hue="CityState", errorbar=None)
+    plt.title(f"Chênh lệch tai nạn theo năm & địa điểm (Top {top_n})")
+    plt.tight_layout()
+    plt.savefig(f"{out_dir}/bar_year_location.png", dpi=200)
+    plt.show()
 
-# =========================
-# BIỂU ĐỒ 1: CỘT NHÓM
-# Chênh lệch tai nạn theo NĂM và ĐỊA ĐIỂM
-# =========================
+    # (2) Bar: Top địa điểm nhiều tai nạn nhất
+    top_rank = df["CityState"].value_counts().head(10).reset_index()
+    top_rank.columns = ["CityState", "Accidents"]
+    plt.figure(figsize=(10, 5))
+    sns.barplot(data=top_rank, x="Accidents", y="CityState", errorbar=None)
+    plt.title("Top 10 địa điểm nhiều tai nạn nhất")
+    plt.tight_layout()
+    plt.savefig(f"{out_dir}/bar_top10_locations.png", dpi=200)
+    plt.show()
 
-# 1) Tạo cột địa điểm dạng "City, State"
-#    Mục đích: tránh trùng tên City ở các bang khác nhau
-df["CityState"] = (
-    df["City"].astype(str).str.strip()
-    + ", "
-    + df["State"].astype(str).str.strip()
-)
-
-# 2) Lấy Top 5 địa điểm có nhiều tai nạn nhất
-#    (để biểu đồ gọn, dễ nhìn)
-top_locations = df["CityState"].value_counts().head(5).index
-df_top = df[df["CityState"].isin(top_locations)]
-
-# 3) Đếm số tai nạn theo từng (Năm, Địa điểm)
-#    size() = đếm số dòng (mỗi dòng = 1 vụ tai nạn)
-year_location = (
-    df_top.groupby(["Year", "CityState"])
-          .size()
-          .reset_index(name="Accidents")
-)
-
-# 4) Vẽ biểu đồ cột nhóm
-plt.figure(figsize=(10, 5))
-sns.barplot(
-    data=year_location,
-    x="Year",
-    y="Accidents",
-    hue="CityState",
-    errorbar=None
-)
-plt.title("Chênh lệch số vụ tai nạn theo năm và địa điểm")
-plt.xlabel("Năm")
-plt.ylabel("Số vụ tai nạn")
-plt.legend(title="Địa điểm")
-plt.tight_layout()
-plt.show()
-
-
-# =========================
-# BIỂU ĐỒ 2: CỘT
-# Top địa điểm có nhiều tai nạn nhất
-# =========================
-
-# 1) Đếm số tai nạn theo địa điểm, lấy Top 10
-top10 = df["CityState"].value_counts().head(10).reset_index()
-top10.columns = ["CityState", "Accidents"]
-
-# 2) Vẽ biểu đồ cột ngang
-plt.figure(figsize=(9, 5))
-sns.barplot(
-    data=top10,
-    x="Accidents",
-    y="CityState",
-    errorbar=None
-)
-plt.title("Top 10 địa điểm có nhiều tai nạn nhất")
-plt.xlabel("Số vụ tai nạn")
-plt.ylabel("Địa điểm")
-plt.tight_layout()
-plt.show()
-
-
-# =========================
-# BIỂU ĐỒ 3: TRÒN
-# Tỷ trọng tai nạn theo địa điểm
-# =========================
-
-# 1) Lấy Top 5 địa điểm
-top5 = df["CityState"].value_counts().head(5)
-
-# 2) Vẽ biểu đồ tròn
-plt.figure(figsize=(6, 6))
-plt.pie(
-    top5.values,
-    labels=top5.index,
-    autopct="%1.1f%%",
-    startangle=90
-)
-plt.title("Tỷ trọng tai nạn theo địa điểm (Top 5)")
-plt.axis("equal")  # giữ hình tròn không méo
-plt.tight_layout()
-plt.show()
+    # (3) Pie: tỷ trọng tai nạn theo địa điểm (Top N)
+    share = df["CityState"].value_counts().head(top_n)
+    plt.figure(figsize=(6, 6))
+    plt.pie(share.values, labels=share.index, autopct="%1.1f%%", startangle=90)
+    plt.title(f"Tỷ trọng tai nạn theo địa điểm (Top {top_n})")
+    plt.axis("equal")
+    plt.tight_layout()
+    plt.savefig(f"{out_dir}/pie_location_share.png", dpi=200)
+    plt.show()
