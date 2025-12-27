@@ -13,7 +13,11 @@ Dự án phân tích dữ liệu tai nạn giao thông tại Mỹ nhằm tìm ra
 
 Để chạy được dự án, bạn cần cài đặt các thư viện sau:
 ```bash
+<<<<<<< HEAD
 pip install -r requirements.txt
+=======
+py install -r requirements.txt
+>>>>>>> 1ccccf6a5974be16cef41b6cf3db7ee52085c3d3
 ```
 🚀 Cách chạy chương trình
 Chạy file main.py để bắt đầu phân tích:
@@ -27,4 +31,8 @@ Data/: Chứa dữ liệu (đã được lọc).
 
 Modules/: Chứa các file code xử lý chính.
 
+<<<<<<< HEAD
 Output/: Chứa biểu đồ và báo cáo xuất ra.
+=======
+Output/: Chứa biểu đồ và báo cáo xuất ra.
+>>>>>>> 1ccccf6a5974be16cef41b6cf3db7ee52085c3d3
