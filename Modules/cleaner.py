@@ -20,7 +20,6 @@ def clean_data(df):
     return df
 
 # --- SAU ĐÓ GỌI HÀM ĐỂ THỰC THI ---
-# Giả sử df_raw là biến chứa dữ liệu bạn vừa load thành công ở ảnh image_5862bb.png
 df = clean_data(df) 
 
 # Kiểm tra lại kết quả
