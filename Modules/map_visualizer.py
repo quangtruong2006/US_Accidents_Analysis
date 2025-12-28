@@ -2,7 +2,7 @@ import pandas as pd
 import folium
 from folium.plugins import HeatMap
 
-def draw_accident_heatmap(csv_path, out_html="heatmap.html", sample_n=200000):
+def plot_heatmap(csv_path, out_html="heatmap.html", sample_n=200000):
     #Load data
     data = pd.read_csv(csv_path)
 
