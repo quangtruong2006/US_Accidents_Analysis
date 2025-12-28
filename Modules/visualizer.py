@@ -30,7 +30,7 @@ def draw_static_charts(csv_path, out_dir="Outputs", top_n=5):
     plt.savefig(f"{out_dir}/bar_year_location.png", dpi=200)
     plt.show()
 
-    # (2) Bar: Top địa điểm nhiều tai nạn nhất
+    # (2) Bar: Top những địa điểm nhiều tai nạn nhất 
     top_rank = df["CityState"].value_counts().head(10).reset_index()
     top_rank.columns = ["CityState", "Accidents"]
     plt.figure(figsize=(10, 5))
