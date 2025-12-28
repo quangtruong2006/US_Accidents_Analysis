@@ -1,0 +1,31 @@
+========================================
+📊 KẾT QUẢ THỐNG KÊ CHI TIẾT (REPORT)
+========================================
+
+📍 Top 5 Thành phố nhiều tai nạn nhất:
+City
+Houston        159960
+Miami          156542
+Los Angeles    142452
+Charlotte      130532
+Dallas         120981
+dtype: int64
+
+⚠️ Tỷ lệ mức độ nghiêm trọng (%):
+Severity
+1     1.19
+2    81.01
+3    16.84
+4     0.96
+Name: count, dtype: float64
+
+⏰ Các khung giờ hay xảy ra tai nạn nhất (Top 5):
+Hour
+16.0    127068
+17.0    124480
+8.0     122181
+7.0     112991
+15.0    109816
+dtype: int64
+
+========================================

@@ -1,30 +1,32 @@
-# 🚦 PHÂN TÍCH TAI NẠN GIAO THÔNG MỸ (US ACCIDENTS ANALYSIS)
+# 🚦 PHÂN TÍCH TAI NẠN GIAO THÔNG HOA KỲ (US ACCIDENTS ANALYSIS)
 
-Dự án phân tích dữ liệu tai nạn giao thông tại Mỹ nhằm tìm ra các điểm đen, nguyên nhân chính và đề xuất giải pháp an toàn.
+Dự án phân tích dữ liệu lớn (Big Data) về tai nạn giao thông tại Mỹ, sử dụng Python để làm sạch, thống kê và trực quan hóa dữ liệu.
 
-## 👥 Thành viên nhóm (Nhóm 2)
-1. **Nguyen Quang Truong** - Trưởng nhóm, Data Loader
-2. **Nguyễn Thị Hoa** - Data Cleaning
-3. **Nguyễn Thị Trúc Mai** - Data Visualization
-4. **Tôn Nữ Phương Quỳnh** - Map Visualization
-5. **Lê Phạm Quang Khánh** - Data Analysis
+## 👥 Thành viên nhóm 2 & Phân công
+| Thành viên | Vai trò | Phụ trách Module | Trạng thái |
+| :--- | :--- | :--- | :--- |
+| **Nguyễn Quang Trường** | 👑 Leader | `main.py`, Git Management, Integration | ✅ Completed |
+| **Nguyễn Thị Hoa** | Member | `cleaner.py` (Data Cleaning) | ✅ Completed |
+| **Trần Văn Khánh** | Member | `analysis.py` (Statistical Analysis) | ✅ Completed |
+| **Lê Thị Tuyết Mai** | Member | `visualizer.py` (Charts & Graphs) | ✅ Completed |
+| **Phạm Như Quỳnh** | Member | `map_visualizer.py` (Heatmap Folium) | ✅ Completed |
 
-## 🛠️ Cài đặt
+## 🚀 Cách chạy chương trình
+1. Cài đặt thư viện:
+   ```
+   pip install pandas matplotlib seaborn folium
+   ```
+Chạy chương trình:
 
 Để chạy được dự án, bạn cần cài đặt các thư viện sau:
 ```bash
 py install -r requirements.txt
 ```
-🚀 Cách chạy chương trình
-Chạy file main.py để bắt đầu phân tích:
 
-```Bash
-
-py main.py
+python main.py
 ```
-📂 Cấu trúc thư mục
-Data/: Chứa dữ liệu (đã được lọc).
+Xem kết quả:
 
-Modules/: Chứa các file code xử lý chính.
+Báo cáo thống kê: Outputs/bao_cao_thong_ke.txt
 
 Output/: Chứa biểu đồ và báo cáo xuất ra.
