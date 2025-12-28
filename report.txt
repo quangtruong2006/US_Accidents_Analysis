@@ -1,0 +1,65 @@
+=== BÁO CÁO PHÂN TÍCH TAI NẠN ===
+
+1. Tai nạn theo thành phố:
+City
+Houston          159960
+Miami            156542
+Los Angeles      142452
+Charlotte        130532
+Dallas           120981
+Orlando           93618
+Austin            92024
+Raleigh           79489
+Nashville         67107
+Baton Rouge       66036
+Atlanta           63675
+Sacramento        59878
+Phoenix           49712
+San Diego         49363
+Minneapolis       46911
+Oklahoma City     46083
+Richmond          44130
+Jacksonville      38794
+Columbia          35220
+Tucson            35029
+
+2. Tai nạn theo khung giờ:
+Hour
+0.0      17116
+1.0      14574
+2.0      14259
+3.0      12867
+4.0      30294
+5.0      39033
+6.0      74431
+7.0     112991
+8.0     122181
+9.0      81460
+10.0     75315
+11.0     75895
+12.0     75354
+13.0     84720
+14.0     92752
+15.0    109816
+16.0    127068
+17.0    124480
+18.0     95265
+19.0     63356
+20.0     45048
+21.0     37247
+22.0     32109
+23.0     19905
+
+3. Mức độ nghiêm trọng:
+Severity
+1      18813
+2    1278022
+3     265621
+4      15080
+
+Tỷ lệ phần trăm theo mức độ:
+Severity
+1     1.19
+2    81.01
+3    16.84
+4     0.96
