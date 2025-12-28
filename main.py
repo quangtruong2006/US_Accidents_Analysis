@@ -3,7 +3,7 @@ import pandas as pd
 from Modules.data_loader import load_data
 from Modules.cleaner import clean_data
 from Modules.analysis import analyze_accidents, save_report 
-from Modules.visualizer import plot_charts
+from Modules.visualizer import draw_static_charts
 from Modules.map_visualizer import plot_heatmap 
 
 data_path = 'Data/processed/US_Accidents_Top20_Cities.csv'
@@ -29,7 +29,7 @@ def main():
         # -----------------------------------------------
 
         # 4. Visualize
-        plot_charts(df_clean)
+        draw_static_charts(df_clean)
         plot_heatmap(df_clean)
         
         print("-" * 50)
