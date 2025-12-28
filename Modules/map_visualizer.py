@@ -5,7 +5,7 @@ import pandas as pd
 def plot_heatmap(df, out_html="heatmap.html"):
     print("Đang dựng bản đồ nhiệt (Heatmap)...")
 
-    # 1. Kiểm tra xem có cột tọa độ không
+    # 1. Kiểm tra xem có cột tọa độ hay không
     if 'Start_Lat' not in df.columns or 'Start_Lng' not in df.columns:
         print("Lỗi: Dữ liệu thiếu cột tọa độ (Start_Lat, Start_Lng). Không thể vẽ bản đồ.")
         return
